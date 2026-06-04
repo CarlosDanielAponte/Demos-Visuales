@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio | Análisis de Datos</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="inicio">
+    <nav class="top-menu">
+      <div class="container menu-wrapper">
+        <ul>
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#seccion-portafolio" class="nav-link">Proyectos</a></li>
+          <li><a href="#seccion-sobre-mi" class="nav-link">Sobre Mí</a></li>
+          <li><a href="#seccion-contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header>
+      <div class="container">
+        <h1>Tu Nombre / Data Analyst</h1>
+        <p>Especialista en modelos maestros de datos y análisis estadístico</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="seccion-sobre-mi" class="scroll-section">
+        <div class="profile-card">
+          <h2>Perfil Analítico</h2>
+          <p>
+            Ingeniero enfocado en la integridad y explotación de grandes
+            volúmenes de datos. Mi área de especialidad es la construcción de
+            modelos maestros y la vinculación de registros poblacionales para
+            garantizar información estructurada y lista para la toma de
+            decisiones.
+          </p>
+          <p>
+            Manejo herramientas como Python (Pandas, Seaborn) y SQL para
+            realizar análisis estadísticos, identificar valores atípicos y
+            asegurar la limpieza de los datos a nivel institucional.
+          </p>
+        </div>
+      </section>
+      <section id="seccion-portafolio" class="scroll-section">
+        <h2 class="section-title">Demos Visuales y Proyectos</h2>
+        <div id="portfolio-grid" class="grid"></div>
+      </section>
+
+      <section id="seccion-contacto" class="scroll-section">
+        <div class="profile-card">
+          <h2>Contacto</h2>
+          <p>
+            Si buscas un perfil puramente analítico para la gestión y modelado
+            de datos, hablemos:
+          </p>
+          <ul class="contact-list">
+            <li><strong>📧 Email:</strong> tu-correo@email.com</li>
+            <li><strong>🔗 LinkedIn:</strong> /in/tu-perfil</li>
+            <li><strong>💻 GitHub:</strong> /tu-usuario</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <img id="modal-img" src="" alt="Vista previa" />
+        <h2 id="modal-title">Título</h2>
+        <div class="tags" id="modal-tags"></div>
+        <div id="modal-desc" class="modal-text"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

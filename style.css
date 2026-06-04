@@ -1,0 +1,266 @@
+/* --- Variables y Configuración Base --- */
+:root {
+  /* Textos Destacados */
+  --primary-color: #c5a059; /* Dorado mate exclusivo para títulos y textos clave */
+
+  /* Fondos */
+  --header-bg: #15222e; /* Azul Oxford profundo para el fondo del encabezado */
+  --nav-bg: #0b131a; /* Azul casi negro para anclar el menú superior */
+  --bg-color: #f4f6f8; /* Gris muy tenue para el fondo general del portafolio */
+  --card-bg: #ffffff; /* Blanco puro para que las tarjetas resalten limpiamente */
+
+  /* Textos Generales */
+  --text-main: #2d3748; /* Gris carbón para los párrafos (facilita la lectura) */
+  --text-muted: #718096; /* Gris medio para descripciones o subtítulos */
+
+  /* Acentos y Bordes */
+  --accent-color: #c5a059; /* Verde petróleo para etiquetas (tags) - contrasta elegante con el oro */
+  --border-color: #e2e8f0; /* Gris muy suave para los bordes de las tarjetas */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* LA MAGIA DEL DESPLAZAMIENTO SUAVE */
+  scroll-behavior: smooth;
+  /* Evita que el menú fijo tape los títulos al deslizarse */
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding-top: 60px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Menú Superior Fijo --- */
+.top-menu {
+  background-color: var(--nav-bg);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.brand:hover {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* .brand:hover {
+  opacity: 0.8;
+} */
+
+.top-menu ul {
+  display: flex;
+  list-style: none;
+  height: 100%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #b0bec5;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0 1.5rem;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 3px solid var(--accent-color);
+}
+
+/* --- Header --- */
+header {
+  background-color: var(--header-bg); /* Ahora usa el azul profundo de fondo */
+  color: var(--primary-color); /* El texto principal (h1) será dorado */
+  text-align: center;
+  padding: 5rem 1rem;
+  margin-bottom: 3rem;
+  border-bottom: 3px solid var(--primary-color); /* Una línea dorada fina para separar */
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+header p {
+  font-weight: 400;
+  color: #e2e8f0; /* Un gris muy claro para el subtítulo, para que no compita con el dorado */
+  font-size: 1.1rem;
+}
+
+/* --- Títulos de Sección --- */
+.section-title {
+  color: var(
+    --primary-color
+  ); /* Los títulos como "Proyectos" o "Sobre Mí" serán dorados */
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* --- Secciones Generales --- */
+.scroll-section {
+  margin-bottom: 4rem; /* Espacio grande entre cada sección */
+}
+
+/* --- Grid de Portafolio --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #eaeaea;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.card-content {
+  padding: 1.5rem;
+}
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(
+    --header-bg
+  ); /* Los títulos de las tarjetas quedan oscuros para leerse bien en blanco */
+}
+.card-content p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.tag {
+  background-color: #e1f5fe;
+  color: var(--accent-color);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Secciones Sobre Mí y Contacto */
+.profile-card {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.profile-card h2 {
+  margin-bottom: 1.5rem;
+  color: var(
+    --primary-color
+  ); /* Títulos dentro de las tarjetas de Sobre Mí también dorados */
+}
+.profile-card p {
+  margin-bottom: 1rem;
+}
+.contact-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+.contact-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* --- Modal --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+.modal-content {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: #999;
+  cursor: pointer;
+}
+#modal-img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+.modal-text {
+  font-size: 1rem;
+  color: #444;
+  white-space: pre-wrap;
+}
