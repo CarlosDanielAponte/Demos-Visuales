@@ -1,3 +1,5 @@
+alert("Página aún en desarrollo");
+
 // Base de datos de proyectos
 // Base de datos de proyectos con nuevos enlaces de prueba estables
 const proyectos = [
