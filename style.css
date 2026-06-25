@@ -264,3 +264,84 @@ header p {
   color: #444;
   white-space: pre-wrap;
 }
+
+/* --- Stack Tecnológico (Logotipos) --- */
+.tech-stack {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.tech-stack h3 {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-muted); /* El texto siempre será gris */
+  cursor: default;
+}
+
+/* El ícono puro, sin colores forzados para que muestre el original */
+.tech-item i {
+  font-size: 4rem;
+  margin-bottom: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+/* Solo hace un pequeño zoom al pasar el ratón, manteniendo sus colores */
+.tech-item:hover i {
+  transform: scale(1.15);
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-logo-container {
+  width: 28px;
+  margin-top: -15px;
+  /* height: 28px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--accent-color); /* Aplica tu color dorado de forma general */
+}
+
+/* Igualamos el tamaño de la imagen al de los Devicons (4rem) */
+.custom-icon {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 0.8rem;
+  transition: transform 0.3s ease;
+  object-fit: contain; /* Evita que la imagen se deforme */
+}
+
+/* Le aplicamos el mismo efecto de zoom al pasar el ratón */
+.tech-item:hover .custom-icon {
+  transform: scale(1.15);
+}
+
+.custom-icon:hover {
+  transform: scale(1.15);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
