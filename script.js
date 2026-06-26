@@ -1,24 +1,29 @@
-// Base de datos de proyectos
-// Base de datos de proyectos con nuevos enlaces de prueba estables
+// Base de datos de proyectos con imágenes fotográficas reales de prueba
 const proyectos = [
   {
     id: 1,
-    titulo: "Modelo Maestro y Vinculación de Registros",
-    // Imagen placeholder en azul oscuro que simula backend/estructura
-    imagen:
-      "https://placehold.co/600x400/2c3e50/ffffff?text=Estructura+de+Datos",
-    tecnologias: ["SQL", "Data Modeling", "ETL"],
+    titulo: "Reporte Estatal IMSS",
+    imagen: "https://picsum.photos/id/1010/600/400",
+    galeria: [
+      "https://picsum.photos/id/1010/800/400",
+      "https://picsum.photos/id/1011/800/400",
+      "https://picsum.photos/id/1012/800/400",
+    ],
+    tecnologias: ["SQL", "Power BI", "Excel"],
     resumen:
-      "Integración de registros poblacionales y aseguramiento de integridad referencial.",
+      "Automatización de reportes estatales para el IMSS, con indicadores de salud y operación institucional.",
     descripcion:
-      "Consolidación de registros distribuidos en múltiples entidades. Diseño de reglas de negocio para la vinculación de identidades, creando un modelo maestro robusto que limpia duplicidades y estandariza la información poblacional para su uso analítico posterior.",
+      "Desarrollo de un sistema de reporteo automatizado utilizando SQL para la extracción de datos, Power BI para la visualización interactiva y Excel para la manipulación avanzada de datos. Se implementaron dashboards que permiten a los directivos del IMSS tomar decisiones basadas en datos en tiempo real.",
   },
   {
     id: 2,
-    titulo: "Análisis Exploratorio de Datos (EDA)",
-    // Imagen placeholder en azul brillante que simula un dashboard
-    imagen: "https://placehold.co/600x400/3498db/ffffff?text=Dashboard+Visual",
-    tecnologias: ["Python", "Pandas", "Seaborn"],
+    titulo: "Análisis Exploratorio de Datos",
+    imagen: "https://picsum.photos/id/1015/600/400",
+    galeria: [
+      "https://picsum.photos/id/1015/800/400",
+      "https://picsum.photos/id/1016/800/400",
+    ],
+    tecnologias: ["Python", "Pandas", "Seaborn", "Matplotlib"],
     resumen:
       "Limpieza y visualización estadística de grandes conjuntos de datos.",
     descripcion:
@@ -26,17 +31,32 @@ const proyectos = [
   },
   {
     id: 3,
-    titulo: "Detección de Anomalías (Outliers)",
-    // Imagen placeholder en verde azulado que simula analítica avanzada
-    imagen:
-      "https://placehold.co/600x400/1abc9c/ffffff?text=Analisis+Estadistico",
-    tecnologias: ["Python", "NumPy", "Estadística"],
+    titulo: "MVC con Java Spring Boot",
+    imagen: "https://picsum.photos/id/1015/600/400",
+    galeria: [
+      "https://picsum.photos/id/1015/800/400",
+      "https://picsum.photos/id/1016/800/400",
+    ],
+    tecnologias: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
     resumen:
-      "Identificación de valores atípicos mediante cálculo del Rango Intercuartílico.",
+      "Desarrollo de aplicaciones web siguiendo el patrón de diseño MVC con Java Spring Boot.",
     descripcion:
-      "Desarrollo de algoritmos en Python para el filtrado sistemático de valores atípicos (outliers) utilizando métodos estadísticos como el IQR. Esto mejoró significativamente la calidad de los datos antes de introducirlos a los modelos de reporteo institucionales.",
+      "Uso de Java para desarrollar la lógica de negocio y Spring Boot para la configuración y el arranque de la aplicación. Implementación de controladores, servicios y repositorios para manejar las operaciones CRUD de manera eficiente. \nAun en proceso...",
   },
 ];
+
+// LÓGICA DEL BOTÓN MAESTRO DE TECNOLOGÍAS
+const botonMaestro = document.getElementById("toggle-tech");
+const contenedorMaestro = document.getElementById("container-tech");
+
+// Verificamos que los elementos existan en el HTML antes de darles la instrucción
+if (botonMaestro && contenedorMaestro) {
+  // Le quitamos la envoltura "DOMContentLoaded" para que se ejecute de forma directa y sin demoras
+  botonMaestro.addEventListener("click", () => {
+    contenedorMaestro.classList.toggle("collapsed");
+    botonMaestro.classList.toggle("collapsed");
+  });
+}
 
 // --- Generación de la Cuadrícula ---
 const grid = document.getElementById("portfolio-grid");
@@ -62,13 +82,34 @@ proyectos.forEach((proyecto) => {
   grid.appendChild(card);
 });
 
-// --- Lógica del Modal ---
+// --- Lógica del Modal y Carrusel ---
 const modal = document.getElementById("project-modal");
 const closeBtn = document.querySelector(".close-btn");
+const track = document.getElementById("carousel-track");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const indicatorsContainer = document.getElementById("carousel-indicators"); // Seleccionamos el nuevo contenedor
+
+let currentIndex = 0; // Controla la posición del carrusel
+
+// Función auxiliar para mover el carrusel y actualizar los puntos
+function actualizarCarrusel() {
+  // Mueve las imágenes
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+  // Actualiza el estado visual de los puntos
+  const dots = indicatorsContainer.querySelectorAll(".dot");
+  dots.forEach((dot, index) => {
+    if (index === currentIndex) {
+      dot.classList.add("active");
+    } else {
+      dot.classList.remove("active");
+    }
+  });
+}
 
 function abrirModal(proyecto) {
   document.getElementById("modal-title").textContent = proyecto.titulo;
-  document.getElementById("modal-img").src = proyecto.imagen;
   document.getElementById("modal-desc").textContent = proyecto.descripcion;
 
   const tagsHTML = proyecto.tecnologias
@@ -76,6 +117,36 @@ function abrirModal(proyecto) {
     .join("");
   document.getElementById("modal-tags").innerHTML = tagsHTML;
 
+  // Limpiar carrusel y puntos anteriores
+  track.innerHTML = "";
+  indicatorsContainer.innerHTML = "";
+
+  // Inyectar la nueva galería de imágenes y crear los puntos
+  proyecto.galeria.forEach((ruta, index) => {
+    // Crea la imagen
+    const img = document.createElement("img");
+    img.src = ruta;
+    track.appendChild(img);
+
+    // Crea el punto correspondiente
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    if (index === 0) dot.classList.add("active"); // El primero empieza activo
+
+    // Hace que el punto sea cliqueable para saltar a esa foto
+    dot.addEventListener("click", () => {
+      currentIndex = index;
+      actualizarCarrusel();
+    });
+
+    indicatorsContainer.appendChild(dot);
+  });
+
+  // Reiniciar a la primera foto
+  currentIndex = 0;
+  actualizarCarrusel();
+
+  // Mostrar modal
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 }
@@ -89,3 +160,22 @@ closeBtn.addEventListener("click", cerrarModal);
 window.addEventListener("click", (e) => {
   if (e.target === modal) cerrarModal();
 });
+
+// --- Lógica de Botones Flechas ---
+if (track && prevBtn && nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    const totalImages = track.querySelectorAll("img").length;
+    if (totalImages === 0) return;
+
+    currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
+    actualizarCarrusel(); // Usamos la nueva función
+  });
+
+  prevBtn.addEventListener("click", () => {
+    const totalImages = track.querySelectorAll("img").length;
+    if (totalImages === 0) return;
+
+    currentIndex = currentIndex === 0 ? totalImages - 1 : currentIndex - 1;
+    actualizarCarrusel(); // Usamos la nueva función
+  });
+}

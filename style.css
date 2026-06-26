@@ -42,7 +42,7 @@ body {
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 5%;
 }
 
 /* --- Menú Superior Fijo --- */
@@ -125,7 +125,7 @@ header p {
     --primary-color
   ); /* Los títulos como "Proyectos" o "Sobre Mí" serán dorados */
   margin-bottom: 2rem;
-  text-align: center;
+  /* text-align: center; */
   font-size: 2rem;
 }
 
@@ -244,7 +244,7 @@ header p {
   overflow-y: auto;
   position: relative;
 }
-.close-btn {
+/* .close-btn {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
@@ -258,18 +258,88 @@ header p {
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 1.5rem;
+} */
+.close-btn {
+  position: absolute;
+  top: 0.1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  color: #999;
+  cursor: pointer;
 }
+
+#modal-img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  margin-top: 3rem;
+}
+
 .modal-text {
   font-size: 1rem;
   color: #444;
   white-space: pre-wrap;
 }
 
+/* --- Carrusel de Imágenes en Modal --- */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-height: 350px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-top: 1.5rem; /* Respeta el botón de cerrar superior */
+  margin-bottom: 1.5rem;
+}
+
+/* La pista horizontal donde se alinean todas las imágenes */
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  height: 350px;
+}
+
+/* Cada imagen toma el 100% del ancho del contenedor y no se encoge */
+.carousel-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Estilo de los botones (flechas) */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Centrado vertical perfecto */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  z-index: 5;
+  transition: background-color 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background-color: var(--primary-color); /* Se pintan de dorado al tocar */
+}
+
+/* Posiciones de los botones */
+.prev-btn {
+  left: 10px;
+}
+.next-btn {
+  right: 10px;
+}
+
 /* --- Stack Tecnológico (Logotipos) --- */
 .tech-stack {
-  margin-top: 3.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  /* padding-top: 2rem; */
+  /* border-top: 1px solid var(--border-color); */
   text-align: center;
 }
 
@@ -344,4 +414,72 @@ header p {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* Convierte el título principal en un botón cliqueable */
+#toggle-tech {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  user-select: none;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+/* Estilo base de la flecha */
+.arrow {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+/* --- ESTADOS CUANDO SE OCULTA TODO --- */
+
+/* Oculta TODO el contenedor maestro */
+#container-tech.collapsed {
+  display: none;
+}
+
+/* Rota la flecha del título maestro cuando está cerrado */
+#toggle-tech.collapsed .arrow {
+  transform: rotate(-90deg);
+}
+
+/* --- Indicadores del Carrusel (Puntos) --- */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px; /* Separación desde abajo */
+  left: 50%;
+  transform: translateX(-50%); /* Centrado perfecto */
+  display: flex;
+  gap: 10px; /* Espacio entre los puntos */
+  z-index: 10;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5); /* Blanco semitransparente */
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra sutil para que resalten */
+}
+
+/* Estado del punto activo (La imagen actual) */
+.dot.active {
+  background-color: var(--primary-color); /* Se pinta de dorado */
+  transform: scale(1.2); /* Crece un poquito */
+}
+
+/* =========================================
+   MODO TEMPORAL: OCULTAR IMÁGENES DE PROYECTOS
+   (Borra este bloque cuando tengas tus fotos)
+   ========================================= */
+.card-img,
+.carousel-container {
+  display: none !important;
 }
