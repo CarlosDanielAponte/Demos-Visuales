@@ -32,10 +32,10 @@ const proyectos = [
   {
     id: 3,
     titulo: "MVC con Java Spring Boot",
-    imagen: "https://picsum.photos/id/1015/600/400",
+    imagen: "https://picsum.photos/id/1020/600/400",
     galeria: [
-      "https://picsum.photos/id/1015/800/400",
-      "https://picsum.photos/id/1016/800/400",
+      "https://picsum.photos/id/1020/800/400",
+      "https://picsum.photos/id/1021/800/400",
     ],
     tecnologias: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
     resumen:
@@ -49,9 +49,7 @@ const proyectos = [
 const botonMaestro = document.getElementById("toggle-tech");
 const contenedorMaestro = document.getElementById("container-tech");
 
-// Verificamos que los elementos existan en el HTML antes de darles la instrucción
 if (botonMaestro && contenedorMaestro) {
-  // Le quitamos la envoltura "DOMContentLoaded" para que se ejecute de forma directa y sin demoras
   botonMaestro.addEventListener("click", () => {
     contenedorMaestro.classList.toggle("collapsed");
     botonMaestro.classList.toggle("collapsed");
@@ -88,16 +86,15 @@ const closeBtn = document.querySelector(".close-btn");
 const track = document.getElementById("carousel-track");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
-const indicatorsContainer = document.getElementById("carousel-indicators"); // Seleccionamos el nuevo contenedor
+const indicatorsContainer = document.getElementById("carousel-indicators");
 
-let currentIndex = 0; // Controla la posición del carrusel
+let currentIndex = 0; // Controla el carrusel pequeño
+let currentGallery = []; // Guarda las fotos para el Lightbox gigante
+let lightboxIndex = 0; // Controla en qué foto va el Lightbox gigante
 
-// Función auxiliar para mover el carrusel y actualizar los puntos
 function actualizarCarrusel() {
-  // Mueve las imágenes
   track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-  // Actualiza el estado visual de los puntos
   const dots = indicatorsContainer.querySelectorAll(".dot");
   dots.forEach((dot, index) => {
     if (index === currentIndex) {
@@ -117,24 +114,37 @@ function abrirModal(proyecto) {
     .join("");
   document.getElementById("modal-tags").innerHTML = tagsHTML;
 
-  // Limpiar carrusel y puntos anteriores
   track.innerHTML = "";
   indicatorsContainer.innerHTML = "";
 
-  // Inyectar la nueva galería de imágenes y crear los puntos
   proyecto.galeria.forEach((ruta, index) => {
-    // Crea la imagen
+    // 1. Crea la imagen del carrusel
     const img = document.createElement("img");
     img.src = ruta;
+
+    // Al picar la imagen, se abre el Lightbox
+    img.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentGallery = proyecto.galeria;
+      lightboxIndex = index;
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      if (lightbox && lightboxImg) {
+        lightboxImg.src = ruta;
+        lightbox.classList.add("show-lightbox");
+      }
+    });
+
     track.appendChild(img);
 
-    // Crea el punto correspondiente
+    // 2. Crea el punto correspondiente
     const dot = document.createElement("div");
     dot.classList.add("dot");
-    if (index === 0) dot.classList.add("active"); // El primero empieza activo
+    if (index === 0) dot.classList.add("active");
 
-    // Hace que el punto sea cliqueable para saltar a esa foto
-    dot.addEventListener("click", () => {
+    dot.addEventListener("click", (e) => {
+      e.stopPropagation();
       currentIndex = index;
       actualizarCarrusel();
     });
@@ -142,11 +152,9 @@ function abrirModal(proyecto) {
     indicatorsContainer.appendChild(dot);
   });
 
-  // Reiniciar a la primera foto
   currentIndex = 0;
   actualizarCarrusel();
 
-  // Mostrar modal
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 }
@@ -161,21 +169,98 @@ window.addEventListener("click", (e) => {
   if (e.target === modal) cerrarModal();
 });
 
-// --- Lógica de Botones Flechas ---
+// Botones Flechas del Carrusel Pequeño
 if (track && prevBtn && nextBtn) {
-  nextBtn.addEventListener("click", () => {
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     const totalImages = track.querySelectorAll("img").length;
     if (totalImages === 0) return;
 
     currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
-    actualizarCarrusel(); // Usamos la nueva función
+    actualizarCarrusel();
   });
 
-  prevBtn.addEventListener("click", () => {
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     const totalImages = track.querySelectorAll("img").length;
     if (totalImages === 0) return;
 
     currentIndex = currentIndex === 0 ? totalImages - 1 : currentIndex - 1;
-    actualizarCarrusel(); // Usamos la nueva función
+    actualizarCarrusel();
   });
 }
+
+// ==========================================
+// LÓGICA DEL LIGHTBOX (VISOR GIGANTE CON FLECHAS)
+// ==========================================
+const lightbox = document.getElementById("lightbox");
+const closeLightboxBtn = document.getElementById("close-lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxPrev = document.getElementById("lightbox-prev");
+const lightboxNext = document.getElementById("lightbox-next");
+
+function apagarLightbox() {
+  if (lightbox) {
+    lightbox.classList.remove("show-lightbox");
+  }
+}
+
+function actualizarImagenLightbox() {
+  if (currentGallery.length === 0) return;
+  lightboxImg.src = currentGallery[lightboxIndex];
+
+  // Sincroniza el carrusel pequeño de atrás
+  currentIndex = lightboxIndex;
+  actualizarCarrusel();
+}
+
+if (lightbox && closeLightboxBtn && lightboxImg) {
+  // Cerrar con el Tache
+  closeLightboxBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    apagarLightbox();
+  });
+
+  // Cerrar al picar el fondo oscuro
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) apagarLightbox();
+  });
+
+  // Flecha Siguiente del Lightbox
+  if (lightboxNext) {
+    lightboxNext.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (currentGallery.length === 0) return;
+      lightboxIndex =
+        lightboxIndex === currentGallery.length - 1 ? 0 : lightboxIndex + 1;
+      actualizarImagenLightbox();
+    });
+  }
+
+  // Flecha Anterior del Lightbox
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (currentGallery.length === 0) return;
+      lightboxIndex =
+        lightboxIndex === 0 ? currentGallery.length - 1 : lightboxIndex - 1;
+      actualizarImagenLightbox();
+    });
+  }
+}
+
+// ==========================================
+// LÓGICA PARA LA TECLA ESCAPE (ESC)
+// ==========================================
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    // 1. Si el visor gigante está abierto, apágalo
+    if (lightbox && lightbox.classList.contains("show-lightbox")) {
+      apagarLightbox();
+    }
+    // 2. Si el visor está apagado, pero el proyecto está abierto, ciérralo
+    else if (modal && modal.style.display === "flex") {
+      cerrarModal();
+    }
+  }
+});
