@@ -583,7 +583,7 @@ a {
    MODO TEMPORAL: OCULTAR IMÁGENES DE PROYECTOS
    (Borra este bloque cuando tengas tus fotos)
    ========================================= */
-/* .card-img,
+.card-img,
 .carousel-container {
   display: none !important;
-} */
+}
