@@ -117,7 +117,7 @@ function iniciarAutoplay() {
     // Avanza a la siguiente foto o regresa a la primera
     currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
     actualizarCarrusel();
-  }, 3000); // Puedes cambiar 4000 por 3000 si lo prefieres más rápido (3 segundos)
+  }, 3500); // Puedes cambiar 4000 por 3000 si lo prefieres más rápido (3 segundos)
 }
 
 // Apaga por completo el reloj automático
@@ -283,17 +283,45 @@ if (lightbox && closeLightboxBtn && lightboxImg) {
 }
 
 // ==========================================
-// LÓGICA PARA LA TECLA ESCAPE (ESC)
+// LÓGICA DEL TECLADO (ESC, FLECHAS MODAL Y LIGHTBOX)
 // ==========================================
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    // 1. Si el visor gigante está abierto, apágalo
-    if (lightbox && lightbox.classList.contains("show-lightbox")) {
+  // 1. SI EL VISOR GIGANTE (LIGHTBOX) ESTÁ ABIERTO
+  if (lightbox && lightbox.classList.contains("show-lightbox")) {
+    if (e.key === "Escape") {
       apagarLightbox();
+    } else if (e.key === "ArrowRight") {
+      if (currentGallery.length === 0) return;
+      lightboxIndex =
+        lightboxIndex === currentGallery.length - 1 ? 0 : lightboxIndex + 1;
+      actualizarImagenLightbox();
+    } else if (e.key === "ArrowLeft") {
+      if (currentGallery.length === 0) return;
+      lightboxIndex =
+        lightboxIndex === 0 ? currentGallery.length - 1 : lightboxIndex - 1;
+      actualizarImagenLightbox();
     }
-    // 2. Si el visor está apagado, pero el proyecto está abierto, ciérralo
-    else if (modal && modal.style.display === "flex") {
+  }
+  // 2. SI EL VISOR GIGANTE ESTÁ CERRADO PERO EL MODAL DEL PROYECTO ESTÁ ABIERTO
+  else if (modal && modal.style.display === "flex") {
+    if (e.key === "Escape") {
       cerrarModal();
+    } else if (e.key === "ArrowRight") {
+      const totalImages = track.querySelectorAll("img").length;
+      if (totalImages === 0) return;
+
+      // Avanza en el carrusel pequeño
+      currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
+      actualizarCarrusel();
+      iniciarAutoplay(); // Resetea los 4 segundos del temporizador automático
+    } else if (e.key === "ArrowLeft") {
+      const totalImages = track.querySelectorAll("img").length;
+      if (totalImages === 0) return;
+
+      // Retrocede en el carrusel pequeño
+      currentIndex = currentIndex === 0 ? totalImages - 1 : currentIndex - 1;
+      actualizarCarrusel();
+      iniciarAutoplay(); // Resetea los 4 segundos del temporizador automático
     }
   }
 });
