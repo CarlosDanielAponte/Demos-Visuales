@@ -3,13 +3,9 @@ const proyectos = [
   {
     id: 1,
     titulo: "Reporte Estatal IMSS",
-    imagen: "https://picsum.photos/id/1010/600/400",
-    galeria: [
-      "https://picsum.photos/id/1010/800/400",
-      "https://picsum.photos/id/1011/800/400",
-      "https://picsum.photos/id/1012/800/400",
-    ],
-    tecnologias: ["SQL", "Power BI", "Excel"],
+    imagen: "resources/01_1.png",
+    galeria: ["resources/01_1.png", "resources/01_2.png", "resources/01_3.png"],
+    tecnologias: ["SQL Server", "Power BI", "Excel", "Limpieza de datos"],
     resumen:
       "Automatización de reportes estatales para el IMSS, con indicadores de salud y operación institucional.",
     descripcion:
@@ -18,11 +14,8 @@ const proyectos = [
   {
     id: 2,
     titulo: "Análisis Exploratorio de Datos",
-    imagen: "https://picsum.photos/id/1015/600/400",
-    galeria: [
-      "https://picsum.photos/id/1015/800/400",
-      "https://picsum.photos/id/1016/800/400",
-    ],
+    imagen: "resources/02_1.png",
+    galeria: ["resources/02_1.png", "resources/02_2.png"],
     tecnologias: ["Python", "Pandas", "Seaborn", "Matplotlib"],
     resumen:
       "Limpieza y visualización estadística de grandes conjuntos de datos.",
@@ -32,16 +25,23 @@ const proyectos = [
   {
     id: 3,
     titulo: "MVC con Java Spring Boot",
-    imagen: "https://picsum.photos/id/1020/600/400",
-    galeria: [
-      "https://picsum.photos/id/1020/800/400",
-      "https://picsum.photos/id/1021/800/400",
-    ],
+    imagen: "resources/03_1.png",
+    galeria: ["resources/03_1.png", "resources/03_2.png"],
     tecnologias: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
     resumen:
       "Desarrollo de aplicaciones web siguiendo el patrón de diseño MVC con Java Spring Boot.",
     descripcion:
       "Uso de Java para desarrollar la lógica de negocio y Spring Boot para la configuración y el arranque de la aplicación. Implementación de controladores, servicios y repositorios para manejar las operaciones CRUD de manera eficiente. \nAun en proceso...",
+  },
+  {
+    id: 4,
+    titulo: "Diseño  y creación de bases de datos",
+    imagen: "resources/04_1.png",
+    galeria: ["resources/04_1.png", "resources/04_2.png", "resources/04_3.png"],
+    tecnologias: ["SQL", "MySQL", "MariaDB", "SQL Server"],
+    resumen: "Diseño y implementación de estructuras de base de datos.",
+    descripcion:
+      "Creación de esquemas desde la diagramación hasta la implementación en sistemas de gestión de bases de datos como MySQL y SQL Server. Optimización de consultas y normalización de datos para mejorar el rendimiento y la integridad de la información.",
   },
 ];
 
@@ -107,7 +107,7 @@ function actualizarCarrusel() {
 
 function abrirModal(proyecto) {
   document.getElementById("modal-title").textContent = proyecto.titulo;
-  document.getElementById("modal-desc").textContent = proyecto.descripcion;
+  document.getElementById("modal-desc").innerHTML = proyecto.descripcion;
 
   const tagsHTML = proyecto.tecnologias
     .map((tech) => `<span class="tag">${tech}</span>`)

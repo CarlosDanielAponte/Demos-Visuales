@@ -138,7 +138,7 @@ header p {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .card {
@@ -169,13 +169,12 @@ header p {
 .card-title {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: var(
-    --header-bg
-  ); /* Los títulos de las tarjetas quedan oscuros para leerse bien en blanco */
+  color: var(--header-bg);
 }
 .card-content p {
   color: var(--text-muted);
   font-size: 0.9rem;
+  text-align: justify;
 }
 
 /* Tags */
@@ -280,6 +279,7 @@ header p {
   font-size: 1rem;
   color: #444;
   white-space: pre-wrap;
+  text-align: justify;
 }
 
 /* --- Carrusel de Imágenes en Modal --- */
@@ -484,7 +484,6 @@ a {
   cursor: zoom-in;
 }
 
-/* BORRAR SI FALLA */
 .lightbox {
   display: none; /* Oculto por defecto */
   position: fixed;
@@ -575,15 +574,4 @@ a {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-/* HASTA AQUI EL BORRADO */
-
-/* =========================================
-   MODO TEMPORAL: OCULTAR IMÁGENES DE PROYECTOS
-   (Borra este bloque cuando tengas tus fotos)
-   ========================================= */
-.card-img,
-.carousel-container {
-  display: none !important;
 }
