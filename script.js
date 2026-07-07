@@ -91,6 +91,7 @@ const indicatorsContainer = document.getElementById("carousel-indicators");
 let currentIndex = 0; // Controla el carrusel pequeño
 let currentGallery = []; // Guarda las fotos para el Lightbox gigante
 let lightboxIndex = 0; // Controla en qué foto va el Lightbox gigante
+let autoplayInterval; // <-- NUEVA: Guarda el temporizador del carrusel automático
 
 function actualizarCarrusel() {
   track.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -103,6 +104,25 @@ function actualizarCarrusel() {
       dot.classList.remove("active");
     }
   });
+}
+
+// Enciende la reproducción automática cada 4 segundos (4000ms)
+function iniciarAutoplay() {
+  detenerAutoplay(); // Limpieza preventiva para evitar duplicar relojes
+
+  autoplayInterval = setInterval(() => {
+    const totalImages = track.querySelectorAll("img").length;
+    if (totalImages <= 1) return; // Si solo hay una foto, no se mueve
+
+    // Avanza a la siguiente foto o regresa a la primera
+    currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
+    actualizarCarrusel();
+  }, 3000); // Puedes cambiar 4000 por 3000 si lo prefieres más rápido (3 segundos)
+}
+
+// Apaga por completo el reloj automático
+function detenerAutoplay() {
+  clearInterval(autoplayInterval);
 }
 
 function abrirModal(proyecto) {
@@ -125,6 +145,7 @@ function abrirModal(proyecto) {
     // Al picar la imagen, se abre el Lightbox
     img.addEventListener("click", (e) => {
       e.stopPropagation();
+      detenerAutoplay();
       currentGallery = proyecto.galeria;
       lightboxIndex = index;
 
@@ -147,6 +168,7 @@ function abrirModal(proyecto) {
       e.stopPropagation();
       currentIndex = index;
       actualizarCarrusel();
+      iniciarAutoplay();
     });
 
     indicatorsContainer.appendChild(dot);
@@ -157,9 +179,17 @@ function abrirModal(proyecto) {
 
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
+  currentIndex = 0;
+  actualizarCarrusel();
+
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+
+  iniciarAutoplay();
 }
 
 function cerrarModal() {
+  detenerAutoplay();
   modal.style.display = "none";
   document.body.style.overflow = "auto";
 }
@@ -178,6 +208,7 @@ if (track && prevBtn && nextBtn) {
 
     currentIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
     actualizarCarrusel();
+    iniciarAutoplay();
   });
 
   prevBtn.addEventListener("click", (e) => {
@@ -187,6 +218,7 @@ if (track && prevBtn && nextBtn) {
 
     currentIndex = currentIndex === 0 ? totalImages - 1 : currentIndex - 1;
     actualizarCarrusel();
+    iniciarAutoplay();
   });
 }
 
@@ -202,6 +234,7 @@ const lightboxNext = document.getElementById("lightbox-next");
 function apagarLightbox() {
   if (lightbox) {
     lightbox.classList.remove("show-lightbox");
+    iniciarAutoplay();
   }
 }
 
