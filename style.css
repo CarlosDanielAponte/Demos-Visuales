@@ -278,7 +278,6 @@ header p {
 .modal-text {
   font-size: 1rem;
   color: #444;
-  white-space: pre-wrap;
   text-align: justify;
 }
 

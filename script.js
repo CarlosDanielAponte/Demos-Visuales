@@ -4,12 +4,22 @@ const proyectos = [
     id: 1,
     titulo: "Reporte Estatal IMSS",
     imagen: "resources/01_1.png",
-    galeria: ["resources/01_1.png", "resources/01_2.png", "resources/01_3.png"],
+    galeria: [
+      "resources/01_1.png",
+      "resources/01_2.png",
+      "resources/01_3.png",
+      "resources/01_4.png",
+      "resources/01_5.png",
+    ],
     tecnologias: ["SQL Server", "Power BI", "Excel", "Limpieza de datos"],
     resumen:
       "Automatización de reportes estatales para el IMSS, con indicadores de salud y operación institucional.",
-    descripcion:
-      "Desarrollo de un sistema de reporteo automatizado utilizando SQL para la extracción de datos, Power BI para la visualización interactiva y Excel para la manipulación avanzada de datos. Se implementaron dashboards que permiten a los directivos del IMSS tomar decisiones basadas en datos en tiempo real.",
+    descripcion: `Colabaración en el desarrollo de un sistema de reportes automatizado para las 32 entidades federativas
+      utilizando SQL para la extracción de datos, Power BI para la visualización interactiva y Excel para la manipulación de datos.
+      <br>Se implementaron dashboards que permiten a los directivos del IMSS tomar decisiones basadas en datos en tiempo real. Estas son
+      solo algunas de las visualizaciones que se generaron para el proyecto, el proyecto completo incluye más de 20 visualizaciones 
+      y reportes que abarcan diferentes áreas de operación del IMSS.
+      <br><strong>La información se presenta de manera anónima y no contiene datos sensibles.</strong>`,
   },
   {
     id: 2,
