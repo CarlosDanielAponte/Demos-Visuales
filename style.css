@@ -574,3 +574,48 @@ a {
     opacity: 1;
   }
 }
+
+/* --- Botón de Descarga de CV --- */
+.cv-container {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.btn-download-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+  color: var(--primary-color); /* Color dorado */
+  border: 2px solid var(--primary-color);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-download-cv:hover {
+  background-color: var(--primary-color);
+  color: var(--nav-bg); /* Fondo azul casi negro para un contraste perfecto */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); /* Sombra dorada difuminada */
+}
+
+/* Si usas FontAwesome para el ícono, esto le da un pequeño efecto al pasar el mouse */
+.btn-download-cv:hover i {
+  animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
