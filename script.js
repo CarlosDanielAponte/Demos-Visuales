@@ -11,7 +11,7 @@ const proyectos = [
       "resources/01_4.png",
       "resources/01_5.png",
     ],
-    tecnologias: ["SQL Server", "Power BI", "Excel", "Limpieza de datos"],
+    tecnologias: ["SQL Server", "Power BI", "Excel", "ETL", "Dashboards"],
     resumen:
       "Automatización de reportes estatales para el IMSS, con indicadores de salud y operación institucional.",
     descripcion: `Colabaración en el desarrollo de un sistema de reportes automatizado para las 32 entidades federativas
@@ -26,22 +26,32 @@ const proyectos = [
     titulo: "Análisis Exploratorio de Datos",
     imagen: "resources/02_1.png",
     galeria: ["resources/02_1.png", "resources/02_2.png"],
-    tecnologias: ["Python", "Pandas", "Seaborn", "Matplotlib"],
+    tecnologias: [
+      "Python",
+      "Docker",
+      "Apache Spark",
+      "Hadoop",
+      // "Pandas",
+      // "Seaborn",
+      // "Matplotlib",
+    ],
     resumen:
       "Limpieza y visualización estadística de grandes conjuntos de datos.",
-    descripcion:
-      "Uso de Python para analizar la distribución de los datos. Implementación de gráficos de dispersión, histogramas y diagramas de caja (boxplots) con Seaborn para entender el comportamiento de las variables clave.",
+    descripcion: `Analisis de datos con infraestructura de Big Data utilizando Apache Spark y Hadoop para procesar grandes volúmenes de información.
+      <br>Se realizaron visualizaciones estadísticas para identificar patrones y tendencias en los datos, utilizando bibliotecas de Python como Pandas, Seaborn y Matplotlib.
+      <br>El proyecto se ejecutó dentro de contenedores Docker para garantizar la portabilidad y consistencia del entorno de desarrollo.`,
   },
   {
     id: 3,
     titulo: "MVC con Java Spring Boot",
-    imagen: "resources/03_1.png",
-    galeria: ["resources/03_1.png", "resources/03_2.png"],
+    imagen: "",
+    galeria: [],
     tecnologias: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
     resumen:
       "Desarrollo de aplicaciones web siguiendo el patrón de diseño MVC con Java Spring Boot.",
-    descripcion:
-      "Uso de Java para desarrollar la lógica de negocio y Spring Boot para la configuración y el arranque de la aplicación. Implementación de controladores, servicios y repositorios para manejar las operaciones CRUD de manera eficiente. \nAun en proceso...",
+    descripcion: `Uso de Java para desarrollar la lógica de negocio y Spring Boot para la configuración y el arranque de la aplicación. 
+      Implementación de controladores, servicios y repositorios para manejar las operaciones CRUD de manera eficiente. <br>
+      <strong>Aun en proceso...</strong>`,
   },
   {
     id: 4,
@@ -51,7 +61,17 @@ const proyectos = [
     tecnologias: ["SQL", "MySQL", "MariaDB", "SQL Server"],
     resumen: "Diseño y implementación de estructuras de base de datos.",
     descripcion:
-      "Creación de esquemas desde la diagramación hasta la implementación en sistemas de gestión de bases de datos como MySQL y SQL Server. Optimización de consultas y normalización de datos para mejorar el rendimiento y la integridad de la información.",
+      "Creación de esquemas desde la diagramación hasta la implementación en sistemas de gestión de bases de datos como MySQL y SQL Server. Optimización de consultas y normalización de datos.",
+  },
+  {
+    id: 5,
+    titulo: "Analisis de resultados de examen de Admision UNAM 2026",
+    imagen: "resources/05_1.png",
+    galeria: ["resources/05_1.png", "resources/05_2.png"],
+    tecnologias: ["Python", "Pandas", "NumPy"],
+    resumen: "Análisis de resultados del examen de admisión de la UNAM 2026.",
+    descripcion: `Análisis estadístico de los resultados del examen de admisión de la UNAM 2026, 
+    mediante técnicas de procesamiento y visualización de datos, se identifican patrones y tendencias en los resultados.`,
   },
 ];
 
