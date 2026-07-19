@@ -44,14 +44,14 @@ const proyectos = [
   {
     id: 3,
     titulo: "MVC con Java Spring Boot",
-    imagen: "",
-    galeria: [],
+    imagen: "resources/03_1.png",
+    galeria: ["resources/03_1.png","resources/03_2.png","resources/03_3.png"],
     tecnologias: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
     resumen:
-      "Desarrollo de aplicaciones web siguiendo el patrón de diseño MVC con Java Spring Boot.",
+      "Desarrollo de aplicaciones web siguiendo el patrón de diseño MVC con Java Spring Boot. Aún en proceso...",
     descripcion: `Uso de Java para desarrollar la lógica de negocio y Spring Boot para la configuración y el arranque de la aplicación. 
       Implementación de controladores, servicios y repositorios para manejar las operaciones CRUD de manera eficiente. <br>
-      <strong>Aun en proceso...</strong>`,
+      <strong>Aún en proceso...</strong>`,
   },
   {
     id: 4,
