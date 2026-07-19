@@ -68,10 +68,15 @@ const proyectos = [
     titulo: "Analisis de resultados de examen de Admision UNAM 2026",
     imagen: "resources/05_1.png",
     galeria: ["resources/05_1.png", "resources/05_2.png"],
-    tecnologias: ["Python", "Pandas", "NumPy"],
+    tecnologias: ["Python", "Mysql", "Jupyter Notebook"],
     resumen: "Análisis de resultados del examen de admisión de la UNAM 2026.",
     descripcion: `Análisis estadístico de los resultados del examen de admisión de la UNAM 2026, 
-    mediante técnicas de procesamiento y visualización de datos, se identifican patrones y tendencias en los resultados.`,
+    mediante técnicas de procesamiento y visualización de datos, se identifican patrones y tendencias en los resultados.<br>
+    Se obtuvo los registros de los aspirantes a entrar a una licenciatura de la UNAM en el sistema escolarizado,
+    estos datos se obtuvieron a traves de un script que descargaba los resultados de manera automatizada, 
+    y posteriormente se creo una base de datos para su análisis. <br>
+    Ya con la información lista se realizaron los análisis estadísticos y visualizaciones para identificar patrones y tendencias 
+    en los resultados del examen de admisión. Asi como, la reallizacion de graficos para comprender mejor los resultados.`,
   },
 ];
 
